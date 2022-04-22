@@ -71,7 +71,7 @@ public class SearchReceipts extends JFrame {
 
 	public SearchReceipts() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 822, 665);
+		setBounds(100, 100, 630, 670);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,71 +86,71 @@ public class SearchReceipts extends JFrame {
 		
 		String receiptColumns[] = {
 				"Receipt ID",
-				"Table Number",
-				"Total Amount",
+				"Table #",
+				"Total",
 				"Date",
 				"Paid"
 		};
 		
 		String receiptData[][] = {
-				{"6251", "5", "985.21", "2016-06-23 09:07:21.205", "Paid"},
-				{"1234", "5", "549.21", "2011-06-23 09:07:21.205", "Paid"},
-				{"235", "4", "19.26", "2012-08-23 09:07:21.205", "UnPaid"},
-				{"45634", "2", "200.20", "2010-06-23 09:07:21.205", "Paid"},
-				{"2342", "5", "897.21", "2019-07-23 09:07:21.205", "Paid"},
-				{"23211", "3", "894.23", "2018-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"6251", "5", "985.21", "2016-06-23 09:07:21", "Paid"},
+				{"1234", "5", "549.21", "2011-06-23 09:07:21", "Paid"},
+				{"235", "4", "19.26", "2012-08-23 09:07:21", "UnPaid"},
+				{"45634", "2", "200.20", "2010-06-23 09:07:21", "Paid"},
+				{"2342", "5", "897.21", "2019-07-23 09:07:21", "Paid"},
+				{"23211", "3", "894.23", "2018-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
 				
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
 			
 		};
 		
@@ -329,7 +329,7 @@ public class SearchReceipts extends JFrame {
 		JRadioButton rdbtnReceiptIdAny = new JRadioButton("Any");
 		rdbtnReceiptIdAny.setSelected(true);
 		rdbtnReceiptIdAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnReceiptIdAny.setBounds(25, 47, 53, 20);
+		rdbtnReceiptIdAny.setBounds(25, 47, 72, 20);
 		contentPane.add(rdbtnReceiptIdAny);
 		txtReceiptId.setText("is exactly");
 		txtReceiptId.setBounds(45, 70, 150, 20);
@@ -375,7 +375,7 @@ public class SearchReceipts extends JFrame {
 
 		JRadioButton rdbtnTableNumberAny = new JRadioButton("Any");
 		rdbtnTableNumberAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		rdbtnTableNumberAny.setBounds(25, 123, 53, 20);
+		rdbtnTableNumberAny.setBounds(25, 123, 72, 20);
 		contentPane.add(rdbtnTableNumberAny);
 
 		rdbtnTableNumberExactly.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -482,13 +482,13 @@ public class SearchReceipts extends JFrame {
 			}
 		});
 		btnRemoveReceipt.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRemoveReceipt.setBounds(595, 516, 180, 40);
+		btnRemoveReceipt.setBounds(215, 567, 180, 40);
 		contentPane.add(btnRemoveReceipt);
 
 		JButton btnTableMenu = new JButton("Return to Tables");
 		btnTableMenu.setBackground(SystemColor.controlHighlight);
 		btnTableMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnTableMenu.setBounds(25, 567, 180, 40);
+		btnTableMenu.setBounds(405, 567, 180, 40);
 		contentPane.add(btnTableMenu);
 
 		JButton btnNewReceipt = new JButton("New Receipt");
@@ -526,17 +526,25 @@ public class SearchReceipts extends JFrame {
 		rdbtnPaidAny.setSelected(true);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(205, 25, 570, 484);
+		scrollPane.setBounds(205, 25, 380, 484);
 		contentPane.add(scrollPane);
 		
 		table = new JTable(receiptData, receiptColumns);
-		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(30);
-		table.getColumnModel().getColumn(2).setPreferredWidth(30);
-		table.getColumnModel().getColumn(4).setPreferredWidth(30);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		table.getColumnModel().getColumn(0).setPreferredWidth(70);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(60);
+		table.getColumnModel().getColumn(3).setPreferredWidth(160);
+		table.setFillsViewportHeight(true); // fills in empty rows
 
-		table.setDefaultEditor(Object.class, null);
-		scrollPane.setViewportView(table);
+		table.setDefaultEditor(Object.class, null); // makes cells uneditable
+		scrollPane.setViewportView(table); 
+		
+		JButton btnEditOrders = new JButton("Edit Orders");
+		btnEditOrders.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnEditOrders.setBackground(SystemColor.controlHighlight);
+		btnEditOrders.setBounds(25, 567, 180, 40);
+		contentPane.add(btnEditOrders);
 
 	}
 }
