@@ -11,6 +11,8 @@ import javax.swing.JTable;
 
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -20,12 +22,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.JScrollBar;
 
 public class SearchReceipts extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtReceiptId;
-	private JTable table;
 	private JTextField txtDate;
 
 	/**
@@ -60,6 +63,7 @@ public class SearchReceipts extends JFrame {
 	private JTextField txtTotalMin;
 	private JTextField txtTotalMax;
 	private JTextField txtTableNumber;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -79,6 +83,78 @@ public class SearchReceipts extends JFrame {
 		JRadioButton rdbtnTotalAmountMinMax = new JRadioButton("");
 		JRadioButton rdbtnDateExactly = new JRadioButton("");
 		JRadioButton rdbtnDateMinMax = new JRadioButton("");
+		
+		String receiptColumns[] = {
+				"Receipt ID",
+				"Table Number",
+				"Total Amount",
+				"Date",
+				"Paid"
+		};
+		
+		String receiptData[][] = {
+				{"6251", "5", "985.21", "2016-06-23 09:07:21.205", "Paid"},
+				{"1234", "5", "549.21", "2011-06-23 09:07:21.205", "Paid"},
+				{"235", "4", "19.26", "2012-08-23 09:07:21.205", "UnPaid"},
+				{"45634", "2", "200.20", "2010-06-23 09:07:21.205", "Paid"},
+				{"2342", "5", "897.21", "2019-07-23 09:07:21.205", "Paid"},
+				{"23211", "3", "894.23", "2018-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+				{"231", "11", "10.58", "2017-06-23 09:07:21.205", "UnPaid"},
+			
+		};
+		
+
 		
 		
 		
@@ -385,39 +461,7 @@ public class SearchReceipts extends JFrame {
 		rdbtnPaidUnpaid.setBounds(25, 489, 72, 20);
 		contentPane.add(rdbtnPaidUnpaid);
 
-		JLabel lblNewLabel_1 = new JLabel("Receipt ID");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(205, 25, 105, 14);
-		contentPane.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_1_1 = new JLabel("Table Number");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1.setBounds(320, 25, 105, 14);
-		contentPane.add(lblNewLabel_1_1);
-
-		JLabel lblNewLabel_1_1_1 = new JLabel("Total Amount");
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1.setBounds(435, 25, 105, 14);
-		contentPane.add(lblNewLabel_1_1_1);
-
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Date");
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1.setBounds(550, 25, 105, 14);
-		contentPane.add(lblNewLabel_1_1_1_1);
-
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Paid");
-		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1.setBounds(665, 25, 105, 14);
-		contentPane.add(lblNewLabel_1_1_1_1_1);
-
-		table = new JTable();
-		table.setBounds(205, 50, 565, 446);
-		contentPane.add(table);
+		
 
 		JButton btnNewButton = new JButton("Search");
 		btnNewButton.setBackground(SystemColor.controlHighlight);
@@ -480,6 +524,19 @@ public class SearchReceipts extends JFrame {
 		groupPaid.add(rdbtnPaidPaid);
 		groupPaid.add(rdbtnPaidUnpaid);
 		rdbtnPaidAny.setSelected(true);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(205, 25, 570, 484);
+		contentPane.add(scrollPane);
+		
+		table = new JTable(receiptData, receiptColumns);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(30);
+		table.getColumnModel().getColumn(2).setPreferredWidth(30);
+		table.getColumnModel().getColumn(4).setPreferredWidth(30);
+
+		table.setDefaultEditor(Object.class, null);
+		scrollPane.setViewportView(table);
 
 	}
 }
