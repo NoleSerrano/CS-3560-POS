@@ -1,9 +1,9 @@
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class Receipt {
 
@@ -24,8 +24,8 @@ public class Receipt {
 	}
 
 	public String[][] getReceipts(boolean checkIdChoice, boolean tableNumberChoice, int totalAmountChoice,
-			int dateChoice, boolean paidChoice, int checkID, int tableNumber, double totalAmount, Date date,
-			boolean paid, double totalAmountMin, double totalAmountMax, Date dateMin, Date dateMax) {
+			int dateChoice, boolean paidChoice, int checkID, int tableNumber, double totalAmount, Timestamp date,
+			boolean paid, double totalAmountMin, double totalAmountMax, Timestamp dateMin, Timestamp dateMax) {
 		try {
 			boolean startWhere = true;
 
@@ -70,6 +70,7 @@ public class Receipt {
 				sql += "totalAmount BETWEEN " + String.valueOf(totalAmountMin) + " AND "
 						+ String.valueOf(totalAmountMax);
 			}
+			
 
 			// DATE
 			if (dateChoice == 1) { // is exactly
@@ -113,18 +114,23 @@ public class Receipt {
 
 			System.out.println(sql);
 			PreparedStatement stmt = con.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
 
 			int rows = getNumRows(stmt);
 			int cols = 5;
-			String[][] receiptData = new String[rows][5];
-
-			for (int i = 0; i < rows; i++) {
+			String[][] receiptData = new String[rows][cols];
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			int i = 0;
+			while(rs.next()) {
 				receiptData[i][0] = String.valueOf(rs.getInt("checkID"));
 				receiptData[i][1] = String.valueOf(rs.getInt("tableNumber"));
-				receiptData[i][2] = String.valueOf(rs.getDate("date"));
+				receiptData[i][2] = String.valueOf(rs.getString("date"));
 				receiptData[i][3] = String.valueOf(rs.getBoolean("paid"));
+				i++;
 			}
+			
+			
 			return receiptData;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -149,7 +155,7 @@ public class Receipt {
 			String sql = "INSERT INTO Receipt (tableNumber, date, paid) VALUES (?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, tableNumber);
-			stmt.setDate(2, new Date(System.currentTimeMillis()));
+			stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
 			stmt.setBoolean(3, false);
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -168,11 +174,11 @@ public class Receipt {
 		}
 	}
 
-	public void updateReceipt(int checkID, int paymentStatus) {
+	public void updateReceipt(int checkID, boolean paymentStatus) {
 		try {
 			String sql = "UPDATE Receipt SET paid=? WHERE checkID=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setBoolean(paymentStatus, true); // not sure if second parameter should be true or false
+			stmt.setBoolean(1, paymentStatus); // not sure if second parameter should be true or false
 			stmt.setInt(2, checkID);
 			stmt.executeUpdate();
 
@@ -183,6 +189,19 @@ public class Receipt {
 
 	public static void main(String[] args) {
 		Receipt receipt = new Receipt();
-		receipt.getReceipts(false, true, 1, 0, false, 1465, 6, 4.64, null, false, 0, 0, null, null);
+//		receipt.getReceipts(false, true, 1, 0, false, 1465, 6, 4.64, null, false, 0, 0, null, null);
+//		
+//		String[][] arr = receipt.getReceipts(false, false, 0, 0, false, 0, 0, 0, null, true, 0, 0, null, null);
+//		print2DArray(arr);
+		receipt.updateReceipt(8, false);
+	}
+	
+	public static void print2DArray(String[][] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[0].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 }

@@ -9,12 +9,12 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 
-import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.Timestamp;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,8 +22,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
-import javax.swing.border.LineBorder;
-import javax.swing.JScrollBar;
 
 public class SearchReceipts extends JFrame {
 
@@ -47,6 +45,8 @@ public class SearchReceipts extends JFrame {
 		});
 	}
 
+	Receipt receipt = new Receipt();
+
 	// ghost text booleans
 	boolean txtReceiptIdHelper = true;
 	boolean txtTableNumberHelper = true;
@@ -65,6 +65,21 @@ public class SearchReceipts extends JFrame {
 	private JTextField txtTableNumber;
 	private JTable table;
 
+	boolean checkIdChoice = false;
+	boolean tableNumberChoice = false;
+	int totalAmountChoice = 0;
+	int dateChoice = 0;
+	boolean paidChoice = false;
+	int checkID;
+	int tableNumber;
+	int totalAmount;
+	Timestamp date;
+	boolean paid;
+	int totalAmountMin;
+	int totalAmountMax;
+	Timestamp dateMin;
+	Timestamp dateMax;
+
 	/**
 	 * Create the frame.
 	 */
@@ -78,91 +93,111 @@ public class SearchReceipts extends JFrame {
 		contentPane.setLayout(null);
 
 		JRadioButton rdbtnReceiptIdExactly = new JRadioButton("");
+		rdbtnReceiptIdExactly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkIdChoice = true;
+			}
+		});
 		JRadioButton rdbtnTableNumberExactly = new JRadioButton("");
+		rdbtnTableNumberExactly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tableNumberChoice = true;
+			}
+		});
 		JRadioButton rdbtnTotalAmountExactly = new JRadioButton("");
+		rdbtnTotalAmountExactly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				totalAmountChoice = 1;
+			}
+		});
 		JRadioButton rdbtnTotalAmountMinMax = new JRadioButton("");
+		rdbtnTotalAmountMinMax.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				totalAmountChoice = 2;
+			}
+		});
 		JRadioButton rdbtnDateExactly = new JRadioButton("");
+		rdbtnDateExactly.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dateChoice = 1;
+			}
+		});
 		JRadioButton rdbtnDateMinMax = new JRadioButton("");
-		
-		String receiptColumns[] = {
-				"Receipt ID",
-				"Table #",
-				"Total",
-				"Date",
-				"Paid"
-		};
-		
-		String receiptData[][] = {
-				{"6251", "5", "985.21", "2016-06-23 09:07:21", "Paid"},
-				{"1234", "5", "549.21", "2011-06-23 09:07:21", "Paid"},
-				{"235", "4", "19.26", "2012-08-23 09:07:21", "UnPaid"},
-				{"45634", "2", "200.20", "2010-06-23 09:07:21", "Paid"},
-				{"2342", "5", "897.21", "2019-07-23 09:07:21", "Paid"},
-				{"23211", "3", "894.23", "2018-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-				{"231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid"},
-			
-		};
-		
+		rdbtnDateMinMax.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dateChoice = 2;
+			}
+		});
 
-		
-		
-		
+		String receiptColumns[] = { "Receipt ID", "Table #", "Total", "Date", "Paid" };
+
+		String receiptData[][] = { { "6251", "5", "985.21", "2016-06-23 09:07:21", "Paid" },
+				{ "1234", "5", "549.21", "2011-06-23 09:07:21", "Paid" },
+				{ "235", "4", "19.26", "2012-08-23 09:07:21", "UnPaid" },
+				{ "45634", "2", "200.20", "2010-06-23 09:07:21", "Paid" },
+				{ "2342", "5", "897.21", "2019-07-23 09:07:21", "Paid" },
+				{ "23211", "3", "894.23", "2018-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+				{ "231", "11", "10.58", "2017-06-23 09:07:21", "UnPaid" },
+
+		};
+
 		txtDateMax = new JTextField();
 		txtDateMax.setForeground(Color.GRAY);
 		txtDateMax.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				dateChoice = 2;
 				rdbtnDateMinMax.setSelected(true);
 				if (txtDateMaxHelper) {
 					txtDateMax.setForeground(Color.BLACK);
@@ -186,6 +221,7 @@ public class SearchReceipts extends JFrame {
 		txtDateMin.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				dateChoice = 2;
 				rdbtnDateMinMax.setSelected(true);
 				if (txtDateMinHelper) {
 					txtDateMin.setForeground(Color.BLACK);
@@ -210,6 +246,7 @@ public class SearchReceipts extends JFrame {
 		txtDate.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				dateChoice = 1;
 				rdbtnDateExactly.setSelected(true);
 				if (txtDateHelper) {
 					txtDate.setForeground(Color.BLACK);
@@ -234,6 +271,7 @@ public class SearchReceipts extends JFrame {
 		txtTotalMax.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				totalAmountChoice = 2;
 				rdbtnTotalAmountMinMax.setSelected(true);
 				if (txtTotalMaxHelper) {
 					txtTotalMax.setForeground(Color.BLACK);
@@ -257,6 +295,7 @@ public class SearchReceipts extends JFrame {
 		txtTotalMin.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				totalAmountChoice = 2;
 				rdbtnTotalAmountMinMax.setSelected(true);
 				if (txtTotalMinHelper) {
 					txtTotalMin.setForeground(Color.BLACK);
@@ -276,10 +315,12 @@ public class SearchReceipts extends JFrame {
 		});
 
 		txtTotalAmount = new JTextField();
+		
 		txtTotalAmount.setForeground(Color.GRAY);
 		txtTotalAmount.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				totalAmountChoice = 1;
 				rdbtnTotalAmountExactly.setSelected(true);
 				if (txtTotalAmountHelper) {
 					txtTotalAmount.setForeground(Color.BLACK);
@@ -303,6 +344,7 @@ public class SearchReceipts extends JFrame {
 		txtReceiptId.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				checkIdChoice = true;
 				rdbtnReceiptIdExactly.setSelected(true);
 				if (txtReceiptIdHelper) {
 					txtReceiptId.setForeground(Color.BLACK);
@@ -313,6 +355,7 @@ public class SearchReceipts extends JFrame {
 
 			@Override
 			public void focusLost(FocusEvent e) {
+				
 				if (txtReceiptId.getText().isEmpty()) {
 					txtReceiptId.setForeground(Color.GRAY);
 					txtReceiptId.setText("is exactly");
@@ -327,6 +370,11 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JRadioButton rdbtnReceiptIdAny = new JRadioButton("Any");
+		rdbtnReceiptIdAny.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkIdChoice = false;
+			}
+		});
 		rdbtnReceiptIdAny.setSelected(true);
 		rdbtnReceiptIdAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnReceiptIdAny.setBounds(25, 47, 72, 20);
@@ -336,7 +384,6 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(txtReceiptId);
 		txtReceiptId.setColumns(10);
 
-		
 		rdbtnReceiptIdExactly.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		rdbtnReceiptIdExactly.setBounds(25, 70, 20, 20);
 		contentPane.add(rdbtnReceiptIdExactly);
@@ -351,6 +398,7 @@ public class SearchReceipts extends JFrame {
 		txtTableNumber.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				tableNumberChoice = true;
 				rdbtnTableNumberExactly.setSelected(true);
 				if (txtTableNumberHelper) {
 					txtTableNumber.setForeground(Color.BLACK);
@@ -374,6 +422,11 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(txtTableNumber);
 
 		JRadioButton rdbtnTableNumberAny = new JRadioButton("Any");
+		rdbtnTableNumberAny.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tableNumberChoice = false;
+			}
+		});
 		rdbtnTableNumberAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnTableNumberAny.setBounds(25, 123, 72, 20);
 		contentPane.add(rdbtnTableNumberAny);
@@ -388,6 +441,11 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(lblTotalAmount);
 
 		JRadioButton rdbtnTotalAmountAny = new JRadioButton("Any");
+		rdbtnTotalAmountAny.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				totalAmountChoice = 0;
+			}
+		});
 		rdbtnTotalAmountAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnTotalAmountAny.setBounds(25, 199, 72, 20);
 		contentPane.add(rdbtnTotalAmountAny);
@@ -418,6 +476,11 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(lblDate);
 
 		JRadioButton rdbtnDateAny = new JRadioButton("Any");
+		rdbtnDateAny.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dateChoice = 0;
+			}
+		});
 		rdbtnDateAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnDateAny.setBounds(25, 321, 72, 20);
 		contentPane.add(rdbtnDateAny);
@@ -447,23 +510,65 @@ public class SearchReceipts extends JFrame {
 		contentPane.add(lblPaid);
 
 		JRadioButton rdbtnPaidAny = new JRadioButton("Any");
+		rdbtnPaidAny.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paidChoice = false;
+			}
+		});
 		rdbtnPaidAny.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnPaidAny.setBounds(25, 443, 72, 20);
 		contentPane.add(rdbtnPaidAny);
 
 		JRadioButton rdbtnPaidPaid = new JRadioButton("Paid");
+		rdbtnPaidPaid.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paidChoice = true;
+				paid = true;
+			}
+		});
 		rdbtnPaidPaid.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnPaidPaid.setBounds(25, 466, 72, 20);
 		contentPane.add(rdbtnPaidPaid);
 
 		JRadioButton rdbtnPaidUnpaid = new JRadioButton("Unpaid");
+		rdbtnPaidUnpaid.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paidChoice = true;
+				paid = false;
+			}
+		});
 		rdbtnPaidUnpaid.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnPaidUnpaid.setBounds(25, 489, 72, 20);
 		contentPane.add(rdbtnPaidUnpaid);
 
-		
-
 		JButton btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (checkIdChoice) {
+					checkID = Integer.valueOf(txtReceiptId.getText());
+				}
+				if (tableNumberChoice) {
+					tableNumber = Integer.valueOf(txtTableNumber.getText());
+				}
+				if (totalAmountChoice == 1) {
+					totalAmount = Integer.valueOf(txtTotalAmount.getText());
+				} else if (totalAmountChoice == 2) {
+					totalAmountMin = Integer.valueOf(txtTotalMin.getText());
+					totalAmountMax = Integer.valueOf(txtTotalMax.getText());
+				}
+				if (dateChoice == 1) {
+					date = Timestamp.valueOf(txtDate.getText());
+				} else if (dateChoice == 2) {
+					dateMin = Timestamp.valueOf(txtDateMin.getText());
+					dateMax = Timestamp.valueOf(txtDateMax.getText());
+				}
+				
+				receipt.getReceipts(checkIdChoice, tableNumberChoice, totalAmountChoice, dateChoice, paidChoice,
+						checkID, tableNumber, totalAmountChoice, date, paid, totalAmountMin, totalAmountMax, dateMin,
+						dateMax);
+			}
+		});
 		btnNewButton.setBackground(SystemColor.controlHighlight);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBounds(25, 516, 180, 40);
@@ -524,11 +629,11 @@ public class SearchReceipts extends JFrame {
 		groupPaid.add(rdbtnPaidPaid);
 		groupPaid.add(rdbtnPaidUnpaid);
 		rdbtnPaidAny.setSelected(true);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(205, 25, 380, 484);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable(receiptData, receiptColumns);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 		table.getColumnModel().getColumn(0).setPreferredWidth(70);
@@ -538,8 +643,8 @@ public class SearchReceipts extends JFrame {
 		table.setFillsViewportHeight(true); // fills in empty rows
 
 		table.setDefaultEditor(Object.class, null); // makes cells uneditable
-		scrollPane.setViewportView(table); 
-		
+		scrollPane.setViewportView(table);
+
 		JButton btnEditOrders = new JButton("Edit Orders");
 		btnEditOrders.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnEditOrders.setBackground(SystemColor.controlHighlight);
